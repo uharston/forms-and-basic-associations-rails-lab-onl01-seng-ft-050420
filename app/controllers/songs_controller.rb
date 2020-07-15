@@ -12,6 +12,7 @@ class SongsController < ApplicationController
   end
 
   def create
+    #  params.raise 
     @song = Song.new(song_params)
 
     if @song.save
@@ -20,6 +21,11 @@ class SongsController < ApplicationController
       render :new
     end
   end
+
+  # def create
+  #   category = Category.find_or_create_by(name: params[:post][:category_name])
+  #   Post.create(content: params[:post][:content], category: category)
+  # end
 
   def edit
     @song = Song.find(params[:id])
@@ -47,7 +53,7 @@ class SongsController < ApplicationController
   private
 
   def song_params
-    params.require(:song).permit(:title)
+    params.require(:song).permit(:title, :artist_name, :genre_id, note_contents: [])
   end
 end
 
